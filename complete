@@ -1,0 +1,13 @@
+complete <- function(directory, id = 1:332) {
+row_count<-length(id)
+a<-data.frame(id=1:row_count,nobs=1)
+k=1
+for(i in id){
+CSV<-paste(directory,"/",sprintf("%03d",i),".csv",sep = "")
+data<-read.csv(CSV)
+a$id[k]<-id[k]
+a$nobs[k]<-sum(complete.cases(data[,2])&complete.cases(data[,3]))
+k=k+1
+}
+
+return(a)}
