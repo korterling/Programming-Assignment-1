@@ -1,0 +1,20 @@
+pollutantmean <- function(directory, pollutant, id=1:332) {
+
+total_sum<-0  
+total_length<-0 
+
+for(i in id){
+filename<-1000+i
+filename1<-as.character(filename)
+filename2<-substr(filename1,2,4)
+CSV<-paste(directory,"/",filename2,".csv",sep = "")
+data<-read.csv(CSV)
+#data<-data.frame(data)
+
+data<-data[,pollutant]
+data<-data[!is.na(data)]
+total_sum<-total_sum+sum(data)
+total_length<-total_length+length(data)
+}
+
+return(total_sum/total_length)}
